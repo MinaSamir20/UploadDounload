@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="card m-sm-3 mt-3 p-3 rounded-4">
+    <div class="m-2">
+      <h2 class="card-title">Upload and attach files</h2>
+      <p class="card-text ps-sm-2">Attach files to this project</p>
+      <div class="dropzone-area position-relative d-flex justify-content-center align-items-center text-center">
+        <h1>
+          <i class="bi bi-file-earmark"></i>
+        </h1>
+        <p>Click to upload or drag and drop</p>
+        <input type="file" id="formFile" (change)="onFileChange($event)" />
+        <p class="message">
+          @if(inputData == ''){
+          No files selected
+          }@else{
+          {{ inputData }}
+          }
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="row gap-3 justify-content-evenly">
+    @for(file of uploadFileNames; track $index){
+    <div class="card col-md-3">
+      <img [src]="file" width="100" class="card-img-top" alt="Card Imge">
+      <div class="card-body">
+        <h5 class="card-title">Card Title</h5>
+        <p class="card-context">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        <button class="btn btn-primary" (click)="downloadFile(file)">Download</button>
+      </div>
+    </div>
+    }
+  </div>
+</div>
