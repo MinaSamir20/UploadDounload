@@ -20,20 +20,17 @@ export class UploadAndDownloadComponent {
   uploadFileNames: string[] = [];
 
   constructor(private http: HttpClient) {}
+
   onFileChange(event: any) {
-    const filetype = ['image/jpg', 'image/jpeg', 'image/png'];
+    const filetype = /^image\/(jpg|jpeg|png)$/i;
     const file = event.currentTarget.files[0];
-    if (filetype.includes(file.type) && file.size < 2000000) {
+    if (filetype.test(file.type) && file.size < 2000000) {
       this.inputData = file.name;
       const formData = new FormData();
       formData.append('file', file);
       this.uploadFiles(this.folderName, formData);
     } else {
-      if (!filetype.includes(file.type)) {
-        alert('File type not supported');
-      } else {
-        alert('File size must be less than 2MB');
-      }
+      filetype.test(file.type) == false? alert('File type not supported'): alert('File size must be less than 2MB');
     }
   }
 
